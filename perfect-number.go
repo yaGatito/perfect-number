@@ -1,11 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+)
 
 func main() {
 	// fmt.Println(FindPerfectNuber(0, 000))
 	// fmt.Println(isPerfectNumber(6))
-	fmt.Println(predictComputationsForRange(1, 6))
+	fmt.Println(predictComputationsForRange(1, 8200))
 }
 
 const (
@@ -58,7 +61,7 @@ func getHalf(n int) int {
 }
 
 func predictComputations(n int) int {
-	return getHalf(n)-1
+	return getHalf(n) - 1
 }
 
 func predictComputationsForRange(start int, finish int) int {
@@ -69,7 +72,9 @@ func predictComputationsForRange(start int, finish int) int {
 		if found {
 			fmt.Println("Found!!!", i)
 		}
-		fmt.Printf("real computations:%d vs predicted:%d for %d\n", realCompt, predictedCmpt, i)
+		if realCompt != predictedCmpt {
+			log.Fatalf("WRONG!!! real computations:%d vs predicted:%d for %d\n", realCompt, predictedCmpt, i)
+		}
 	}
 	return predictedCmpt
 }
